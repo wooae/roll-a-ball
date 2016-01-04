@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public Text winText;
     public Text clockText;
     public Text finalTimeText;
+    public Text loseText;
 
     private Rigidbody rb;
     private int score;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour {
         startTime = Time.time;
         setClockText();
         finalTimeText.text = "";
+        loseText.text = "";
     }
 
     // Update is called before each frame
@@ -49,6 +51,16 @@ public class PlayerController : MonoBehaviour {
             score += 1;
             setScoreText();
         }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Bad Guy"))
+        {
+            loseText.text = "You Lose!!! :(";
+            Application.Quit();
+        }
+
     }
 
     void setScoreText()
